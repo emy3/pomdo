@@ -10,8 +10,10 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
+// set timeout
 const timeout = time.Minute * 20
 
+// define model structs
 type model struct {
 	timer timer.Model
 	keymap keymap
@@ -19,6 +21,7 @@ type model struct {
 	quitting bool
 }
 
+// define the keymap structs 
 type keymap struct {
 	start key.Binding
 	stop key.Binding
@@ -30,6 +33,7 @@ func (m model) Init() tea.Cmd {
 	return m.timer.Init()
 }
 
+// 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case timer.TickMsg:
@@ -59,11 +63,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, m.timer.Toggle()
 		}
 	}
-
 	return m, nil
-
 }
 
+// help view for keymaps
 func (m model) helpView() string {
 	return "\n" + m.help.ShortHelpView([]key.Binding{
 		m.keymap.start,
@@ -74,7 +77,7 @@ func (m model) helpView() string {
 }
 
 func (m model) View() string {
-	// for more detail - read m.timer.Timeout to get
+	// read m.timer.Timeout to get
 	// remaining time as a time.Duration and skip calling m.timer.View()
 	// entirely
 	s := m.timer.View()
