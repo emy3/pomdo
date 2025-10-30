@@ -1,0 +1,33 @@
+# .golangci.yml
+run:
+  timeout: 5m
+  # skip‑dirs, exclude‑rules etc as needed
+  # skip‑files:
+  #   - "generated.go"
+
+linters:
+  disable-all: true
+  enable:
+    - govet
+    - staticcheck
+    - errcheck
+    # add any others you want
+  disable:
+    - goimports # disable goimports if you don’t want it auto‐fixing imports
+    - unused # you might disable ‘unused’ if you want to keep unused things for now
+
+linters-settings:
+  goimports:
+    ignore: true # ignore settings so goimports doesn’t do its import reorgs
+  unused:
+    allow-unused‑funcs: true # optional: allow unused functions if you like
+
+issues:
+  exclude-rules:
+    - path: _test\.go$ # example: skip test files
+      linters:
+        - errcheck
+
+# optional: treat certain issues as warnings instead of errors
+severity:
+  errcheck: warning
