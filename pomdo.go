@@ -10,8 +10,13 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-// set timeout
-const timeout = time.Minute * 20
+// setup variables
+const (
+	timeout = time.Minute * 20
+	work = time.Minute * 20
+	shortBreak = time.Minute * 5
+	longBreak = time.Minute * 15
+)
 
 // define model structs
 type model struct {
